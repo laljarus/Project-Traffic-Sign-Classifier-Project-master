@@ -90,7 +90,7 @@ The LeNet architecture is used in this project. The LeNet architecture is a mult
 source: Yann Lecunn
 
 | Layer         		|     Description	        					| 
-|:---------------------:|:---------------------------------------------:| 
+|:---------------------|:---------------------------------------------| 
 | Input         		| 32x32x3 RGB image   							| 
 | 1st Convolution	| 5x5x3x6 filter, 1x1 stride, valid padding, outputs 28x28x6 	|
 | RELU					|Activation											|
@@ -98,21 +98,18 @@ source: Yann Lecunn
 | 2nd Convolution | 5x5x6x16 filter, 1x1 stride, valid padding, outputs 10x10x16      									|
 | RELU					|Activation												|
 | Max pooling	    | 2x2 filter, 2x2 stride,  outputs 5x5x16 				|
-|Flatten| reshapes the input array into a vector/row matrix,output 5x5x16 = 400 |
-|1st Fully connected		| flattened array is connected to 120 hidden nodes, dimension of the weight matrix is 400x12			|
+|Flatten| Reshapes the input array into a vector/row matrix,output 5x5x16 = 400 |
+| Fully connected		|Flattened array is connected to 120 hidden nodes,  weights 400x120,bias 120			|
 | RELU					|Activation												|
-| Fully connected		| flattened array is connected to 120 hidden nodes,  weights 400x120,bias 120			|
-| RELU					|Activation												|
-| Fully connected		|hidden layer 84 nodes,  weights 120x84,bias 84		|
+| Fully connected		|Hidden layer 84 nodes,  weights 120x84,bias 84		|
 | RELU					|Activation			|
-| Fully connected		|output layer nodes = no. of classes(43),  weights 84x43,bias 43		|
-| Softmax				| Activation to calulate probablities of the classes							|
-|						|												|
-|						|												|
- 
+| Fully connected		|Output layer nodes = no. of classes(43),  weights 84x43,bias 43		|
+| Softmax				| Activation to calulate probablities of the classes							| 
 
 
-#### 3. Describe how you trained your model. The discussion can include the type of optimizer, the batch size, number of epochs and any hyperparameters such as learning rate.
+#### 3. Model Training
+
+The model is trained using gradient decent approach to minimize the loss
 
 To train the model, I used an ....
 
