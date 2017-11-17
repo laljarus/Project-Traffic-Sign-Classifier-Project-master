@@ -109,7 +109,8 @@ source: Yann Lecunn
 
 #### 3. Model Training
 
-The model is trained using gradient decent approach to minimize the loss
+The model is trained using gradient decent approach to minimize the cross entropy loss between the softmax predition from the network and the labels from the input dataset.For the optimizer Adam optimizer is used,which is an extension of the stocastic gradient desent algorithm. The adam algorithm is computationally more efficient than the stocastic gradient desent algorithm. As opposed to 
+
 
 To train the model, I used an ....
 
