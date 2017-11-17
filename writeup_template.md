@@ -4,7 +4,6 @@
 
 The aim of this project is to develop an algorithm using deep learning convolution neural network to classify traffic signs. The project invols the following steps.
 
-** Build a Traffic Sign Recognition Project**
 
 The goals / steps of this project are the following:
 * Load the data set (see below for links to the project data set)
@@ -26,8 +25,9 @@ The goals / steps of this project are the following:
 [image7]: ./examples/placeholder.png "Traffic Sign 4"
 [image8]: ./examples/placeholder.png "Traffic Sign 5"
 
-## Rubric Points
-### Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/481/view) individually and describe how I addressed each point in my implementation.  
+### Rubric Points
+
+## Here the project reqirement [rubric points](https://review.udacity.com/#!/rubrics/481/view) are considered individually and described in detail how the implementation is done.
 
 ---
 ### Writeup / README
