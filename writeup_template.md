@@ -16,12 +16,12 @@ The goals / steps of this project are the following:
 
 [//]: # (Image References)
 
-[image1]: './BarChart.png' "Visualization"
-[image2]: ./examples/grayscale.jpg "Grayscaling"
-[image3]: ./examples/random_noise.jpg "Random Noise"
-[image4]: ./examples/placeholder.png "Traffic Sign 1"
-[image5]: ./examples/placeholder.png "Traffic Sign 2"
-[image6]: ./examples/placeholder.png "Traffic Sign 3"
+[image1]: ./BarChart.png "Class Dataset Barchart"
+[image2]: ./TrafficSigns.png "Traffic Signs"
+[image3]: ./mean_variance.png "Signal Conditioning"
+[image4]: ./MinMaxNorm.PNG "Min Max Normalization"
+[image5]: ./Normalization.png "Before and after normalization"
+[image6]: ./LeNet.png "LeNet Architecture"
 [image7]: ./examples/placeholder.png "Traffic Sign 4"
 [image8]: ./examples/placeholder.png "Traffic Sign 5"
 
@@ -37,7 +37,8 @@ The project files includes the python project code written in jupyter notebook, 
 
 ### Data Set Summary & Exploration
 
-#### The input data contains three sets of data called the training, validation and test. Only the training dataset is used for training the neural network. The proformance of trained network is validated using the validation dataset. Based on the performance of the network measured from the training and validation set the parameters of the network are tuned to acheive maximum possible performance. In the following sections it is explained in detail how the parameters of the network are tuned. Finally after tuning of parameters the network is tested with test dataset. 
+#### 1. Dataset Summary
+The input data contains three sets of data called the training, validation and test. Only the training dataset is used for training the neural network. The proformance of trained network is validated using the validation dataset. Based on the performance of the network measured from the training and validation set the parameters of the network are tuned to acheive maximum possible performance. In the following sections it is explained in detail how the parameters of the network are tuned. Finally after tuning of parameters the network is tested with test dataset. 
 
 The summary of the dataset are calculated using python native features and then the dataset is visualized using matplotlib library. The basic summary of the dataset follows:
 
@@ -47,50 +48,65 @@ The summary of the dataset are calculated using python native features and then 
 * The shape of a traffic sign image is (32, 32, 3)
 * The number of unique classes/labels in the data set is 43
 
-#### 2. Include an exploratory visualization of the dataset.
+#### 2. Exploratory visualization of the dataset.
 The images in the dataset are grouped according its class and the no of images in each class are plotted as a bar chart in the following picture.
 
 
-...
-
 ![alt text][image1]
 
-### Design and Test a Model Architecture
+The firt thing that can be noted is that the number of images in the training dataset are greater than validation and test dataset. Large amount of training data is useful because the network learns better when it is trained with large dataset. It should also be noted that the classes such as 'speed limit 50 km/hr' have large amount of data compared to class such as "Dangerous Curve to the Left". The network might have difficulty in classifying the traffic signs which have less data. In such cases it is better to augument the data for such classes. But in this project this is not done as the network acheived satisfactory performance.
 
-#### 1. Describe how you preprocessed the image data. What techniques were chosen and why did you choose these techniques? Consider including images showing the output of each preprocessing technique. Pre-processing refers to techniques such as converting to grayscale, normalization, etc. (OPTIONAL: As described in the "Stand Out Suggestions" part of the rubric, if you generated additional data for training, describe why you decided to generate additional data, how you generated the data, and provide example images of the additional data. Then describe the characteristics of the augmented training set like number of images in the set, number of images for each class, etc.)
+The datasets have 43 different traffic signs one image in each of the traffic signs are shown in the picture below.
 
-As a first step, I decided to convert the images to grayscale because ...
-
-Here is an example of a traffic sign image before and after grayscaling.
 
 ![alt text][image2]
 
-As a last step, I normalized the image data because ...
+### Design and Test a Model Architecture
 
-I decided to generate additional data because ... 
+#### 1. Preprocessing
 
-To add more data to the the data set, I used the following techniques because ... 
-
-Here is an example of an original image and an augmented image:
+A raw image in RGB format is represented in form of an array of size m x n x 3 where is m,n are number of pixes along width and height of the image and 3 represents three channels red,blue and green. Each value in this array ranges from 0 to 255 for an 8 bit image. The gradient desent algorithm works better if the input dataset is normalized i.e. the image has equal variances in both horzontal and vertical directions and zero mean. 
 
 ![alt text][image3]
 
-The difference between the original data set and the augmented data set is the following ... 
+In this project a simpler approach called min-max scaling is used. This approach scales the input values from 0 to 255 in a 8 bit image to a values in a given range. The following formula is used to do min-max scaling.
+
+Min-Max Scaling:
+
+![alt text][image4]
+
+In the above forumla a and b are choosen output range chosen in the project as 0 and 1. X_min and X_max are the minimum and maximum values of the input data. This formula it simpler because the mean and variance are avoided and it acheives good performance. The picture below shows the images before and after normalization.
+
+![alt text][image5]
+
+This project feeds RGB coloured image to the network as the convolution neural networks are able to handle 3 channel images and also the colour information can be useful in classifying the traffic signs as some signs are in different colours.
+
+#### 2. Model Architecture
+
+The LeNet architecture is used in this project. The LeNet architecture is a multi layed neural network architecture which is popularly used to classify handwritten character recognition. The LeNet architecture contains two sets of convolution layer and maximul pooling layer alternatevely followed by three fully connected layer.The convolution and fully connected layer uses rectified logic units(Relu) for activation.Finally the output of the final is feed to softmax function to calculate the probablities of the classes. The following image and the table shows the LeNet architecture used in this project.
 
 
-#### 2. Describe what your final model architecture looks like including model type, layers, layer sizes, connectivity, etc.) Consider including a diagram and/or table describing the final model.
-
-My final model consisted of the following layers:
+![alt text][image6]
+source: Yann Lecunn
 
 | Layer         		|     Description	        					| 
 |:---------------------:|:---------------------------------------------:| 
 | Input         		| 32x32x3 RGB image   							| 
-| Convolution 3x3     	| 1x1 stride, same padding, outputs 32x32x64 	|
-| RELU					|												|
-| Max pooling	      	| 2x2 stride,  outputs 16x16x64 				|
-| Convolution 3x3	    | etc.      									|
-| Fully connected		| etc.        									|
-| Softmax				| etc.        									|
+| 1st Convolution	| 5x5x3x6 filter, 1x1 stride, valid padding, outputs 28x28x6 	|
+| RELU					|Activation											|
+| Max pooling	    | 2x2 filter, 2x2 stride,  outputs 14x14x6 				|
+| 2nd Convolution | 5x5x6x16 filter, 1x1 stride, valid padding, outputs 10x10x16      									|
+| RELU					|Activation												|
+| Max pooling	    | 2x2 filter, 2x2 stride,  outputs 5x5x16 				|
+|Flatten| reshapes the input array into a vector/row matrix,output 5x5x16 = 400 |
+|1st Fully connected		| flattened array is connected to 120 hidden nodes, dimension of the weight matrix is 400x12			|
+| RELU					|Activation												|
+| Fully connected		| flattened array is connected to 120 hidden nodes,  weights 400x120,bias 120			|
+| RELU					|Activation												|
+| Fully connected		|hidden layer 84 nodes,  weights 120x84,bias 84		|
+| RELU					|Activation			|
+| Fully connected		|output layer nodes = no. of classes(43),  weights 84x43,bias 43		|
+| Softmax				| Activation to calulate probablities of the classes							|
 |						|												|
 |						|												|
  
