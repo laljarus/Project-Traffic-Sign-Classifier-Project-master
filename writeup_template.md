@@ -2,6 +2,8 @@
 
 ## Writeup
 
+The aim of this project is to develop an algorithm using deep learning convolution neural network to classify traffic signs. The project invols the following steps.
+
 ** Build a Traffic Sign Recognition Project**
 
 The goals / steps of this project are the following:
