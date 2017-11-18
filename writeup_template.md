@@ -142,12 +142,16 @@ Traffic signs downloaded from the internet:
 
 ![alt text][image9]
 
+
 Prediction made by the network:
+
 
 ![alt text][image10]
 
 
-The following table shows the top 5 probablities for each of the traffic signs.
+
+The following table shows the top 5 probablities for each of the traffic signs:
+
 
 
 Image No | Label| Highest Probablity   | 2nd Highest     | 3rd  Highest| 4th Highest| 5th Highest|
