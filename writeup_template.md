@@ -22,8 +22,10 @@ The goals / steps of this project are the following:
 [image4]: ./MinMaxNorm.PNG "Min Max Normalization"
 [image5]: ./Normalization.png "Before and after normalization"
 [image6]: ./LeNet.png "LeNet Architecture"
-[image7]: ./examples/placeholder.png "Traffic Sign 4"
-[image8]: ./examples/placeholder.png "Traffic Sign 5"
+[image7]: ./Loss.png "Loss"
+[image8]: ./Accuracy.png "Accuracy"
+[image9]: ./TrafficSignsInternetInput
+[image10]: ./TrafficSignsInternetOutput
 
 ### Rubric Points
 
@@ -107,74 +109,74 @@ source: Yann Lecunn
 | Softmax				| Activation to calulate probablities of the classes							| 
 
 
-#### 3. Model Training
+#### 3. Model Training and Solution Approach
 
-The model is trained using gradient decent approach to minimize the cross entropy loss between the softmax predition from the network and the labels from the input dataset.For the optimizer Adam optimizer is used,which is an extension of the stocastic gradient desent algorithm. The adam algorithm is computationally more efficient than the stocastic gradient desent algorithm. The adam optimizer does not keep the learning rate constant instead it computes the adaptive learning rates of each of the parameters based on the first and second order moments of the gradients. This makes the optimizer more efficient. The details of the optimizer is out of scope here. The model is trained by feeding the input datasets in batches, calculating the cross entropy loss and adapting the weights of the network based on the learning rate. The whole dataset is feed through the network several times called EPOCHS in order to train the network better. This leads to several hyper parameters learning rate, batch size and EPOCHS which have to be tuned in order to acheive high accuracy. During the traiging of the model validation dataset is feed through the to evaluate the accuracy of the network's predictions. Since the training data is used several times in order to train the network it lead to a problem of overfitting. The network was able to classify the training data with high accuracy but the it could not classify the validation data with the same accuracy. To avoid this problem dropout regularization technique is introduced to the trianing process, which makes the network more robust. The droput function was applied on the networks prediction before being fed to the cross entropy function. The dorpout  function randomy drops some of the data in the networks prediction and doubles the remaining values in order to maintain the total probablity of the prediction. This forces the network to become more robust. After application of dropout the network was able to classify the validation dataset with higher accuracy and closer to the accuracy of training dataset.
+The model is trained using gradient decent approach to minimize the cross entropy loss between the softmax predition from the network and the labels from the input dataset.For the optimizer Adam optimizer is used,which is an extension of the stocastic gradient desent algorithm. The adam algorithm is computationally more efficient than the stocastic gradient desent algorithm. The adam optimizer does not keep the learning rate constant instead it computes the adaptive learning rates of each of the parameters based on the first and second order moments of the gradients. This makes the optimizer more efficient. The details of the optimizer is out of scope here. The model is trained by feeding the input datasets in batches, calculating the cross entropy loss and adapting the weights of the network based on the learning rate. The whole dataset is feed through the network several times called EPOCHS in order to train the network better. This leads to several hyper parameters learning rate, batch size and EPOCHS which have to be tuned in order to acheive high accuracy. During the traiging of the model validation dataset is feed through the to evaluate the accuracy of the network's predictions.The learning rate affects the way the network learns, higher learning rate means that the weights are changed in bigger steps this might make the network to overshoot from the taget and the loss may not be minimized. Lower learning rate reduces the size of steps the weights are changed and it makes the optimization to converge better. The batch size also plays similar role as the learning rate as it is propotional to the number of training steps. If the batch size is higher the number of training steps is lower and the network may not be trained to get best possible result. Lowering the batch size increases the number of iterations in the learning process and thus trains the network learn better. Like the batch size EPOCHS is also propotional network's number of learning steps. Higher the EPOCHS the networks learns better but this can cause the network to overfit the training dataset. To make to network classify the data with high accurary the parameters learning rate, batch size and EPOCHS were chosen carfully by repeated iterations. 
 
-#### 4. Solution Approach
+Since the training data is used several times in order to train the network it lead to a problem of overfitting. The network was able to classify the training data with high accuracy but the it could not classify the validation data with the same accuracy. To avoid this problem dropout regularization technique is introduced to the trianing process, which makes the network more robust. The droput function was applied on the networks prediction before being fed to the cross entropy function. The dorpout  function randomy drops some of the data in the networks prediction and doubles the remaining values in order to maintain the total probablity of the prediction. This forces the network to become more robust. After application of dropout the network was able to classify the validation dataset with higher accuracy and closer to the accuracy of training dataset. The dropout operation adds one more parameter to the network called the keep probabplity parameter which ranges from 0 to 1. The keep probablity represents the probabablity of an element to be kept in the output of the dropout function.
+
+Finally the following parameter values:
+* Learning Rate = 0.0005
+* Batch Size = 100
+* EPOCHS = 40
 
 The final model results were:
 * training set accuracy of 0.998
 * validation set accuracy of 0.939 
 * test set accuracy of 0.915
 
-If an iterative approach was chosen:
-* What was the first architecture that was tried and why was it chosen?
-* What were some problems with the initial architecture?
-* How was the architecture adjusted and why was it adjusted? Typical adjustments could include choosing a different model architecture, adding or taking away layers (pooling, dropout, convolution, etc), using an activation function or changing the activation function. One common justification for adjusting an architecture would be due to overfitting or underfitting. A high accuracy on the training set but low accuracy on the validation set indicates over fitting; a low accuracy on both sets indicates under fitting.
-* Which parameters were tuned? How were they adjusted and why?
-* What are some of the important design choices and why were they chosen? For example, why might a convolution layer work well with this problem? How might a dropout layer help with creating a successful model?
+The loss and accurary during the learning process:
 
-If a well known architecture was chosen:
-* What architecture was chosen?
-* Why did you believe it would be relevant to the traffic sign application?
-* How does the final model's accuracy on the training, validation and test set provide evidence that the model is working well?
- 
+
+![alt text][image7]
+
+
+![alt text][image8]
+
 
 ### Test a Model on New Images
 
-#### 1. Choose five German traffic signs found on the web and provide them in the report. For each image, discuss what quality or qualities might be difficult to classify.
+Some images of the german traffic signs were downloaded from the internet and these data were feed to the network to be classified. The network was able to classify 9 out of the 12 signs correctly which is an accuracy of 0.75. 
 
-Here are five German traffic signs that I found on the web:
+Traffic signs downloaded from the internet: 
 
-![alt text][image4] ![alt text][image5] ![alt text][image6] 
-![alt text][image7] ![alt text][image8]
+![alt text][image9]
 
-The first image might be difficult to classify because ...
+Prediction made by the network:
 
-#### 2. Discuss the model's predictions on these new traffic signs and compare the results to predicting on the test set. At a minimum, discuss what the predictions were, the accuracy on these new predictions, and compare the accuracy to the accuracy on the test set (OPTIONAL: Discuss the results in more detail as described in the "Stand Out Suggestions" part of the rubric).
-
-Here are the results of the prediction:
-
-| Image			        |     Prediction	        					| 
-|:---------------------:|:---------------------------------------------:| 
-| Stop Sign      		| Stop sign   									| 
-| U-turn     			| U-turn 										|
-| Yield					| Yield											|
-| 100 km/h	      		| Bumpy Road					 				|
-| Slippery Road			| Slippery Road      							|
+![alt text][image10]
 
 
-The model was able to correctly guess 4 of the 5 traffic signs, which gives an accuracy of 80%. This compares favorably to the accuracy on the test set of ...
-
-#### 3. Describe how certain the model is when predicting on each of the five new images by looking at the softmax probabilities for each prediction. Provide the top 5 softmax probabilities for each image along with the sign type of each probability. (OPTIONAL: as described in the "Stand Out Suggestions" part of the rubric, visualizations can also be provided such as bar charts)
-
-The code for making predictions on my final model is located in the 11th cell of the Ipython notebook.
-
-For the first image, the model is relatively sure that this is a stop sign (probability of 0.6), and the image does contain a stop sign. The top five soft max probabilities were
-
-| Probability         	|     Prediction	        					| 
-|:---------------------:|:---------------------------------------------:| 
-| .60         			| Stop sign   									| 
-| .20     				| U-turn 										|
-| .05					| Yield											|
-| .04	      			| Bumpy Road					 				|
-| .01				    | Slippery Road      							|
+The following table shows the top 5 probablities for each of the traffic signs.
 
 
-For the second image ... 
+Image No | Label| Highest Probablity   | 2nd Highest     | 3rd  Highest| 4th Highest| 5th Highest|
+|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
+| 1| Ahead only| Ahead only| Roundabout Mandatory | Turn Right Ahead| Go Straight or Right| Turn Left Ahead|
+|          |           | 1         | 0.000    | 0.000    | 0.000    | 0.000    |
+| 2 | No entry  | No entry  | Yield    | Bicycles  Crossing | No Passing for Vehicles over 3.5 Metric Tons| Slippery Road |
+|          |           | 0.589     | 0.250    | 0.150    | 0.008    | 0.001    |
+| 3| Priority road| Priority road| End of all speed and passing limits| Traffic Signals  | End of no passing  | No entry |
+|          |           | 1         | 0.000    | 0.000    | 0.000    | 0.000    |
+|4| Right-of-way at the next intersection | Right-of-way at the next intersection | Bicycles crossing | Speed limit(80km/h)| Beware of ice/snow| Speed limit (30km/h)|
+|          |           | 1.000     | 0.000    | 0.000    | 0.000    | 0.000    |
+| 5 | Roundabout mandatory| Roundabout mandatory | General caution  | Right-of-way at the next intersection| Children crossing| Keep right|
+|          |           | 0.999     | 0.001    | 0.000    | 0.000    | 0.000    |
+| 6 |Slippery road|Speed limit(20km/h)| No entry | Dangerous curve to the right| End of speed limit(80km/h)| Speed limit(30km/h)|
+|          |           | 0.958     | 0.034    | 0.004    | 0.002    | 0.000    |
+| 7|Speed limit(30km/h)|Speed limit(30km/h)|Speed limit(50km/h)|Go straingt or right | Keep right| End of all speed and passing limits|
+|          |           | 0.937     | 0.062    | 0.000    | 0.000    | 0.000    |
+|8|Speed limit(60km/h)|Speed limit(50km/h)|Speed limit(60km/h)|Speed limit(80km/h)|Speed limit(30km/h)| Go straight or right|
+|          |           | 0.718     | 0.282    | 0.000    | 0.000    | 0.000    |
+| 9        |Speed limit(70km/h)|Speed limit(20km/h)| Bicycles crossing|Ahead only|Speed limit(30km/h)|Go straight or right|
+|          |           | 0.589     | 0.373    | 0.033    | 0.005    | 0.000    |
+| 10       | Stop      | Stop      |Speed limit(30km/h)|Speed limit(80km/h)|Priority road|Speed limit(50km/h)|
+|          |           | 0.985     | 0.014    | 0.001    | 0.000    | 0.000    |
+| 11|Turn right ahead|Turn right ahead|Right-of-the-way at the next intersection|Beware of ice/snow|Road narrows on the right|Double curve|
+|          |           | 0.623     | 0.377    | 0.000    | 0.000    | 0.000    |
+| 12       | Yield     | Yield     |Speed limit(30km/h)| No vehiclea| No passing|Speed limit(60km/h) |
+|          |           | 1.000     | 0.000    | 0.000    | 0.000    | 0.000    |
 
-### (Optional) Visualizing the Neural Network (See Step 4 of the Ipython notebook for more details)
-#### 1. Discuss the visual output of your trained network's feature maps. What characteristics did the neural network use to make classifications?
+
 
 
