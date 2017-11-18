@@ -29,7 +29,7 @@ The goals / steps of this project are the following:
 
 ### Rubric Points
 
-## Here the project reqirement [rubric points](https://review.udacity.com/#!/rubrics/481/view) are considered individually and described in detail how the implementation is done.
+## Here the project reqirements [rubric points](https://review.udacity.com/#!/rubrics/481/view) are considered individually and described in detail how the implementation is done.
 
 ---
 ### Project Files
@@ -177,6 +177,6 @@ Image No | Label| Highest Probablity   | 2nd Highest     | 3rd  Highest| 4th Hig
 | 12       | Yield     | Yield     |Speed limit(30km/h)| No vehiclea| No passing|Speed limit(60km/h) |
 |          |           | 1.000     | 0.000    | 0.000    | 0.000    | 0.000    |
 
-
+The network was not able to classify the traffic signs Slippery Road, Speed Limit 60km/h and Speed Limit 70km/h. Only around 500 images of slippery road traffic sign was used during the training, may the training dataset with more images could be used to train the network or data augumentaion could be used to improve the networks ability to classify this sign. If we look at the top probablities for the speed limit signs the network is not able to classify the digits in the traffic signs properly. For traffic signs speed limit 60 km/h it predicts as 70km/h and for speed limit 70km/h it predicts as 20km/h speed limit. This suggest that the network can be trained more to improve the classification of similar images.  To make the algorithm work better the traffic sign recognition can be done in two steps, in the first step the network should be trained to classify the type of road sign such as speed limits, cautions, directions etc.Then in the second step the network should classify the specific sign such as speed limit 50km/h, 70km/h etc. 
 
 
