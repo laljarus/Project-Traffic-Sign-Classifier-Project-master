@@ -109,17 +109,14 @@ source: Yann Lecunn
 
 #### 3. Model Training
 
-The model is trained using gradient decent approach to minimize the cross entropy loss between the softmax predition from the network and the labels from the input dataset.For the optimizer Adam optimizer is used,which is an extension of the stocastic gradient desent algorithm. The adam algorithm is computationally more efficient than the stocastic gradient desent algorithm. As opposed to 
+The model is trained using gradient decent approach to minimize the cross entropy loss between the softmax predition from the network and the labels from the input dataset.For the optimizer Adam optimizer is used,which is an extension of the stocastic gradient desent algorithm. The adam algorithm is computationally more efficient than the stocastic gradient desent algorithm. The adam optimizer does not keep the learning rate constant instead it computes the adaptive learning rates of each of the parameters based on the first and second order moments of the gradients. This makes the optimizer more efficient. The details of the optimizer is out of scope here. The model is trained by feeding the input datasets in batches, calculating the cross entropy loss and adapting the weights of the network based on the learning rate. The whole dataset is feed through the network several times called EPOCHS in order to train the network better. This leads to several hyper parameters learning rate, batch size and EPOCHS which have to be tuned in order to acheive high accuracy. During the traiging of the model validation dataset is feed through the to evaluate the accuracy of the network's predictions. Since the training data is used several times in order to train the network it lead to a problem of overfitting. The network was able to classify the training data with high accuracy but the it could not classify the validation data with the same accuracy. To avoid this problem dropout regularization technique is introduced to the trianing process, which makes the network more robust. The droput function was applied on the networks prediction before being fed to the cross entropy function. The dorpout  function randomy drops some of the data in the networks prediction and doubles the remaining values in order to maintain the total probablity of the prediction. This forces the network to become more robust. After application of dropout the network was able to classify the validation dataset with higher accuracy and closer to the accuracy of training dataset.
 
+#### 4. Solution Approach
 
-To train the model, I used an ....
-
-#### 4. Describe the approach taken for finding a solution and getting the validation set accuracy to be at least 0.93. Include in the discussion the results on the training, validation and test sets and where in the code these were calculated. Your approach may have been an iterative process, in which case, outline the steps you took to get to the final solution and why you chose those steps. Perhaps your solution involved an already well known implementation or architecture. In this case, discuss why you think the architecture is suitable for the current problem.
-
-My final model results were:
-* training set accuracy of ?
-* validation set accuracy of ? 
-* test set accuracy of ?
+The final model results were:
+* training set accuracy of 0.998
+* validation set accuracy of 0.939 
+* test set accuracy of 0.915
 
 If an iterative approach was chosen:
 * What was the first architecture that was tried and why was it chosen?
