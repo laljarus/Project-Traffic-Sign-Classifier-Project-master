@@ -24,8 +24,8 @@ The goals / steps of this project are the following:
 [image6]: ./LeNet.png "LeNet Architecture"
 [image7]: ./Loss.png "Loss"
 [image8]: ./Accuracy.png "Accuracy"
-[image9]: ./TrafficSignsInternetInput
-[image10]: ./TrafficSignsInternetOutput
+[image9]: ./TrafficSignsInternetInput.png
+[image10]: ./TrafficSignsInternetOutput.png
 
 ### Rubric Points
 
